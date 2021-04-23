@@ -10,21 +10,48 @@ import ConfirmedPage from './ConfirmedPage.js';
 import img from './Assets/Pizza.jpg';
 
 const initialFormValues = {
+	name: '',
 	size: '',
 	sauce: '',
 	specialInstructions: '',
-	name: ''
+	pepperoni: false,
+	sausage: false,
+	canadianBacon: false,
+	spicyItalianSausage: false,
+	grilledChicken: false,
+	onions: false,
+	greenPeppers: false,
+	dicedTomatoes: false,
+	blackOlives: false,
+	roastedGarlic: false,
+	artichokeHearts: false,
+	threeCheese: false,
+	pineapple: false,
+	extraCheese: false
 };
 
 // const dummyData = [{ name: 'Michael' }];
 
-// const schema = yup.object().shape({
-// 	name: yup.string().required('Please enter your name').min(3, 'Name needs to be 3 characters minimum')
-// 	// last_name: yup.string().required('Please enter your last name').min(2, 'Name needs to be 2 characters minimum'),
-// 	// email: yup.string().email('Please enter a valid email'),
-// 	// password: yup.string().required('Please choose a valid password').min(8, 'Password must be 8 characters minimum'),
-// 	// tos: yup.boolean().oneOf([true], 'You must agree to the Terms of Service to continue')
-// }); // creates the testing criteria and error messages for the form entry fields
+const schema = yup.object().shape({
+	name: yup.string().required('Name is required').min(2, 'Your Name must be at least 2 characters'),
+	size: yup.string(),
+	sauce: yup.string(),
+	specialInstructions: yup.string(),
+	pepperoni: yup.boolean(),
+	sausage: yup.boolean(),
+	canadianBacon: yup.boolean(),
+	spicyItalianSausage: yup.boolean(),
+	grilledChicken: yup.boolean(),
+	onions: yup.boolean(),
+	greenPeppers: yup.boolean(),
+	dicedTomatoes: yup.boolean(),
+	blackOlives: yup.boolean(),
+	roastedGarlic: yup.boolean(),
+	artichokeHearts: yup.boolean(),
+	threeCheese: yup.boolean(),
+	pineapple: yup.boolean(),
+	extraCheese: yup.boolean()
+}); // creates the testing criteria and error messages for the form entry fields
 
 const Appdiv = styled.div`
 	nav {
@@ -36,7 +63,7 @@ const Appdiv = styled.div`
 		display: flex;
 	}
 	.navlink {
-		border: 2px solid black;
+		border: 1px solid black;
 		width: 10rem;
 		display: flex;
 		justify-content: center;
@@ -53,7 +80,9 @@ const Appdiv = styled.div`
 	#pizza-form {
 		display: flex;
 		flex-direction: column;
-		border: 2px solid black;
+		/* border: 1px solid black; */
+		box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+		border-radius: 10px;
 		width: 70%;
 		margin: 0 auto 5%;
 	}
@@ -72,50 +101,88 @@ const App = () => {
 	// const [list, setList] = useState(dummyData);
 	const [formValues, setFormValues] = useState(initialFormValues);
 	const [disabled, setDisabled] = useState(true); // determines if the submit button is useable
-	// const [errors, setErrors] = useState({
-	// 	name: ''
-	// 	// last_name: '',
-	// 	// email: '',
-	// 	// password: '',
-	// 	// tos: false
-	// }); // for the error messages to be displayed as form entry data does not meet yup criteria
+	const [errors, setErrors] = useState({
+		name: '',
+		size: '',
+		sauce: '',
+		specialInstructions: '',
+		pepperoni: false,
+		sausage: false,
+		canadianBacon: false,
+		spicyItalianSausage: false,
+		grilledChicken: false,
+		onions: false,
+		greenPeppers: false,
+		dicedTomatoes: false,
+		blackOlives: false,
+		roastedGarlic: false,
+		artichokeHearts: false,
+		threeCheese: false,
+		pineapple: false,
+		extraCheese: false
+	}); // for the error messages to be displayed as form entry data does not meet yup criteria
 
 	// checks for errors and displays them if conditions are not met
-	// const setFormErrors = (name, value) => {
-	// 	yup.reach(schema, name)
-	// 		.validate(value)
-	// 		.then(() => {
-	// 			setErrors({ ...errors, [name]: '' }); // if conditions are met replaces an error message with an empty string
-	// 		})
-	// 		.catch(err => {
-	// 			setErrors({ ...errors, [name]: err.errors[0] }); // this is just the way it needs to be. See Month 2 Week 2 Day 3 Lambda
-	// 		});
-	// };
+	const setFormErrors = (name, value) => {
+		yup.reach(schema, name)
+			.validate(value)
+			.then(() => {
+				setErrors({ ...errors, [name]: '' }); // if conditions are met replaces an error message with an empty string
+			})
+			.catch(err => {
+				setErrors({ ...errors, [name]: err.errors[0] }); // this is just the way it needs to be. See Month 2 Week 2 Day 3 Lambda
+			});
+	};
 
 	// this collects the inputs from the forms as they are entered, and prepares then for the submission process
 	const changeHandler = e => {
 		e.preventDefault();
 		const { name, type, value, checked } = e.target;
 		const updatedInfo = type === 'checkbox' ? checked : value;
-		// setFormErrors(name, updatedInfo);
+		setFormErrors(name, updatedInfo);
 		setFormValues({ ...formValues, [name]: updatedInfo });
 	};
 
 	const submit = e => {
 		e.preventDefault();
-		// const newUser = {
-		// 	name: formValues.first_name.trim()
-		// 	// email: formValues.email.trim(),
-		// 	// password: formValues.password.trim(),
-		// 	// tos: formValues.first_name
-		// };
-		setFormValues(initialFormValues); // clears the form values
+		const newOrder = {
+			name: '',
+			size: '',
+			sauce: '',
+			specialInstructions: '',
+			pepperoni: false,
+			sausage: false,
+			canadianBacon: false,
+			spicyItalianSausage: false,
+			grilledChicken: false,
+			onions: false,
+			greenPeppers: false,
+			dicedTomatoes: false,
+			blackOlives: false,
+			roastedGarlic: false,
+			artichokeHearts: false,
+			threeCheese: false,
+			pineapple: false,
+			extraCheese: false
+		};
+		axios
+			.post('https://reqres.in/api/orders', newOrder)
+			.then(res => {
+				console.log(res);
+				// setUsers(res.data.data);  // what I would use if the POST request was real
+				// setUsers([...users, newUser]);
+				// setUsers([...res.data.data, newUser]); // useful in this instance, for demo purposes
+				setFormValues(initialFormValues); // clears the form values
+			})
+			.catch(err => {
+				console.log(err);
+			});
 	};
 
 	// checks to see if all fields are valid so it mat enable the submit button
-	// useEffect(() => {
-	// 	schema.isValid(formValues).then(valid => setDisabled(!valid));
-	// }, [formValues]);
+	useEffect(() => {
+		schema.isValid(formValues).then(valid => setDisabled(!valid));
+	}, [formValues]);
 
 	return (
 		<Appdiv>
@@ -130,7 +197,7 @@ const App = () => {
 						submit={submit}
 						changeHandler={changeHandler}
 						disabled={disabled}
-						// errors={errors}
+						errors={errors}
 					/>
 				</Route>
 				<Route exact path="/">

@@ -2,77 +2,110 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+const Form = styled.div`
+	header,
+	header h2 {
+		text-align: center;
+		background-color: red;
+	}
+
+	h1 {
+		margin: 5% 5%;
+	}
+
+	h2 {
+		color: white;
+	}
+
+	h3,
+	h4 {
+		padding: 0;
+		margin: 0;
+	}
+
+	h3 {
+		font-size: 1.5rem;
+	}
+
+	h4 {
+		font-size: 0.8rem;
+	}
+
+	.section-label {
+		background-color: red;
+		color: white;
+		padding: 3% 5%;
+	}
+
+	select {
+		margin: 3% 5%;
+		font-size: 1.3rem;
+	}
+
+	.radio-btns {
+		display: flex;
+		flex-direction: column;
+		margin: 3% 5%;
+		font-size: 1.3rem;
+	}
+
+	.checkboxes {
+		display: flex;
+		justify-content: space-between;
+		margin: 3% 5%;
+		font-size: 1.3rem;
+	}
+
+	.err {
+		color: red;
+		font-size: 15%;
+	}
+
+	.box-column {
+		display: flex;
+		flex-direction: column;
+		width: 50%;
+	}
+	.box-column input {
+		margin: 3% 5%;
+	}
+
+	#specialInstructions {
+		margin: 3% 5%;
+		width: 80%;
+	}
+
+	.name-section {
+		margin: 3% 5%;
+		font-size: 1.3rem;
+	}
+
+	.link-btn {
+		margin: 1.5rem auto;
+	}
+	.sub-btn {
+		justify-content: center;
+		padding: 1rem 2rem;
+		font-size: 1.5rem;
+		border-radius: 20px;
+		background-color: lightgreen;
+	}
+
+	input {
+		top: auto;
+		/* position: fixed; */
+	}
+`;
+
 export default function PizzaForm(props) {
 	const { submit, changeHandler, values, disabled, errors } = props;
 
-	const Form = styled.div`
-		header,
-		header h2 {
-			text-align: center;
-			background-color: red;
-		}
-		.section-label {
-			background-color: grey;
-			padding: 1%;
-		}
-
-		select {
-			margin: 3% 5%;
-			font-size: 1.3rem;
-		}
-
-		.radio-btns {
-			display: flex;
-			flex-direction: column;
-			margin: 3% 5%;
-			font-size: 1.3rem;
-		}
-
-		.checkboxes {
-			display: flex;
-			margin: 3% 5%;
-			font-size: 1.3rem;
-		}
-
-		.err {
-			color: red;
-			font-size: 15%;
-		}
-
-		.box-column {
-			display: flex;
-			flex-direction: column;
-		}
-		.box-column input {
-			margin: 3% 5%;
-		}
-
-		#specialInstructions {
-			margin: 3% 5%;
-			width: 80%;
-		}
-
-		.name-section {
-			margin: 0 5%;
-		}
-		.link-btn {
-			margin: 1.5rem auto;
-		}
-		.sub-btn {
-			justify-content: center;
-			padding: 1rem 2rem;
-			font-size: 1.5rem;
-			border-radius: 20px;
-			background-color: lightgreen;
-		}
-	`;
-
 	return (
 		<Form>
-			<form id="pizza-form" onSubmit={submit}>
+			<form id="pizza-form">
 				<header>
 					<h2>Build Your Own Pizza</h2>
-					<div className="main-image">hi</div>
+					<div className="main-image"></div>
 				</header>
 				<h1>Build Your Own Pizza</h1>
 				<div>
@@ -80,7 +113,7 @@ export default function PizzaForm(props) {
 						<h3>Choice of Size</h3>
 						<h4>Required</h4>
 					</div>
-					<select onChange={changeHandler} value={values.size} name="size">
+					<select id="size-dropdown" onChange={changeHandler} value={values.size} name="size">
 						<option value="">Select</option>
 						<option value="Small">Small - 10"</option>
 						<option value="Medium">Medium - 14"</option>
@@ -187,6 +220,36 @@ export default function PizzaForm(props) {
 								/>{' '}
 								Spicy Italian Sausage
 							</label>
+							<label>
+								<input
+									name="grilledChicken"
+									id="grilledChicken"
+									type="checkbox"
+									onChange={changeHandler}
+									checked={values.grilledChicken}
+								/>{' '}
+								Grilled Chicken
+							</label>
+							<label>
+								<input
+									name="onions"
+									id="onions"
+									type="checkbox"
+									onChange={changeHandler}
+									checked={values.onions}
+								/>{' '}
+								Onions
+							</label>
+							<label>
+								<input
+									name="greenPepper"
+									id="greenPepper"
+									type="checkbox"
+									onChange={changeHandler}
+									checked={values.greenPepper}
+								/>{' '}
+								Green Pepper
+							</label>
 						</div>
 
 						<div className="rightboxes box-column">
@@ -230,57 +293,80 @@ export default function PizzaForm(props) {
 								/>{' '}
 								Artichoke Hearts
 							</label>
+							<label>
+								<input
+									name="threeCheese"
+									id="threeCheese"
+									type="checkbox"
+									onChange={changeHandler}
+									checked={values.threeCheese}
+								/>{' '}
+								Three Cheese
+							</label>
+							<label>
+								<input
+									name="pineapple"
+									id="pineapple"
+									type="checkbox"
+									onChange={changeHandler}
+									checked={values.pineapple}
+								/>{' '}
+								Pineapple
+							</label>
+							<label>
+								<input
+									name="extraCheese"
+									id="extraCheese"
+									type="checkbox"
+									onChange={changeHandler}
+									checked={values.extraCheese}
+								/>{' '}
+								Extra Cheese
+							</label>
 						</div>
 					</div>
 				</div>
 
-				{/* <div>
-					<div className="section-label">
-						<h3>Choice of Substitutes</h3>
-						<h4>Choose up to 1</h4>
-					</div>
-					<div className="radio-btns">
-						<label>
-							<input type="radio" value="OriginalRed" name="sauce" /> Original Red
-						</label>
-					</div>
-				</div> */}
-				{/* <div className="err">{errors.specialInstructions}</div> */}
+				<div className="err">{errors.specialInstructions}</div>
 				<div>
 					<div className="section-label">
 						<h3>Special Instructions</h3>
 					</div>
-					<textarea
-						name="specialInstructions"
-						id="specialInstructions"
-						type="text"
-						placeholder="Is there anything else you'd like to add"
-						onChange={changeHandler}
-						value={values.specialInstructions}
-					/>
+					<div className="name-section">
+						<input
+							name="specialInstructions"
+							id="special-text"
+							type="text"
+							placeholder="Is there anything else you'd like to add?"
+							onChange={changeHandler}
+							value={values.specialInstructions}
+						/>
+					</div>
 				</div>
 
-				{/* <div className="err">{errors.name}</div> */}
-				<div className="name-section">
+				<div className="err">{errors.name}</div>
+				<div>
 					<div className="section-label">
 						<h3>Personal Details</h3>
 						<h4>Required</h4>
 					</div>
-					<label>
-						Name:
-						<input
-							name="name"
-							id="name"
-							type="text"
-							placeholder="Enter Name..."
-							onChange={changeHandler}
-							value={values.name}
-						/>
-					</label>
+					<div className="name-section">
+						<label htmlFor="name">
+							Name:
+							<input
+								name="name"
+								id="name-input"
+								type="text"
+								placeholder="Enter Name..."
+								onChange={changeHandler}
+								value={values.name}
+							/>
+						</label>
+					</div>
 				</div>
 
 				<Link className="link-btn" to="/pizza-ordered">
-					<button className="sub-btn" disabled={disabled}>
+					<button onClick={submit} id="order-button" className="sub-btn" disabled={disabled}>
 						Submit Order
 					</button>
 				</Link>
