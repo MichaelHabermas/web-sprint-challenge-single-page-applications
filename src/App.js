@@ -165,7 +165,7 @@ const App = () => {
 		axios
 			.post('https://reqres.in/api/orders', newOrder)
 			.then(res => {
-				console.log(res);
+				console.log(res.data);
 				// setUsers(res.data.data);  // what I would use if the POST request was real
 				// setUsers([...users, newUser]);
 				// setUsers([...res.data.data, newUser]); // useful in this instance, for demo purposes

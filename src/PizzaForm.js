@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Form = styled.div`
@@ -100,6 +100,8 @@ const Form = styled.div`
 export default function PizzaForm(props) {
 	const { submit, changeHandler, values, disabled, errors } = props;
 
+	const history = useHistory();
+
 	return (
 		<Form>
 			<form id="pizza-form">
@@ -133,6 +135,7 @@ export default function PizzaForm(props) {
 						<label>
 							<input
 								name="sauce"
+								id="OriginalRed"
 								type="radio"
 								onChange={changeHandler}
 								checked={values.sauce === 'OriginalRed'}
@@ -143,6 +146,7 @@ export default function PizzaForm(props) {
 						<label>
 							<input
 								name="sauce"
+								id="garlicRanch"
 								type="radio"
 								onChange={changeHandler}
 								checked={values.sauce === 'GarlicRanch'}
@@ -153,8 +157,8 @@ export default function PizzaForm(props) {
 						<label>
 							<input
 								name="sauce"
-								type="radio"
 								id="BBQSauce"
+								type="radio"
 								onChange={changeHandler}
 								checked={values.sauce === 'BBQSauce'}
 								value="BBQSauce"
@@ -164,8 +168,8 @@ export default function PizzaForm(props) {
 						<label>
 							<input
 								name="sauce"
-								type="radio"
 								id="SpinachAlfredo"
+								type="radio"
 								onChange={changeHandler}
 								checked={values.sauce === 'SpinachAlfredo'}
 								value="SpinachAlfredo"
@@ -367,11 +371,18 @@ export default function PizzaForm(props) {
 					</div>
 				</div>
 
-				<Link className="link-btn" to="/pizza-ordered" onClick={submit} id="order-button">
-					<button className="sub-btn" disabled={disabled}>
-						Submit Order
-					</button>
-				</Link>
+				<button
+					className="sub-btn link-btn"
+					id="order-button"
+					disabled={disabled}
+					type="submit"
+					onClick={e => {
+						history.push('/pizza-ordered');
+						submit(e);
+					}}
+				>
+					Submit Order
+				</button>
 			</form>
 		</Form>
 	);

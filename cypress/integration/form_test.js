@@ -16,7 +16,6 @@ describe('Testing the sprint challenge app', () => {
 	// TEST 1
 	it('Sanity test to make sure the tests run and work', () => {
 		expect(1 + 2).to.equal(3);
-		// expect(1 + 2).to.equal(4);
 		expect(1 + 2).not.to.equal(4);
 	});
 
@@ -36,13 +35,14 @@ describe('Testing the sprint challenge app', () => {
 	it('Fill in text fields and test', () => {
 		nameInput().should('have.value', '').type('Michael').should('have.value', 'Michael');
 		specialInstructionsInput().should('have.value', '').type('Half Cheese').should('have.value', 'Half Cheese');
-		// emailInput().should('have.value', '').type('habermoose@aol.com').should('have.value', 'habermoose@aol.com');
-		// passwordInput().should('have.value', '').type('qwertyuiop').should('have.value', 'qwertyuiop');
 		garlicRanchRadio().should('not.be.checked').click().should('be.checked');
 		pepperoniCheckbox().should('not.be.checked').click().should('be.checked');
 		grilledChickenCheckbox().should('not.be.checked').click().should('be.checked');
 		pineappleCheckbox().should('not.be.checked').click().should('be.checked');
-		// tosCheckbox().should('not.be.checked').check().should('be.checked');
 		orderButton().click();
+		// .then(() => {
+		// 	expect(submit()).to.be.calledOnce;
+		// });
+		cy.url().should('include', '/pizza-ordered');
 	});
 });
