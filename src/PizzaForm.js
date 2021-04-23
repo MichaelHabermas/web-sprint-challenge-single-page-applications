@@ -6,20 +6,32 @@ export default function PizzaForm(props) {
 	const { submit, changeHandler, values, disabled, errors } = props;
 
 	const Form = styled.div`
+		header,
+		header h2 {
+			text-align: center;
+			background-color: red;
+		}
 		.section-label {
 			background-color: grey;
 			padding: 1%;
 		}
 
+		select {
+			margin: 3% 5%;
+			font-size: 1.3rem;
+		}
+
 		.radio-btns {
 			display: flex;
 			flex-direction: column;
-			padding: 2rem;
+			margin: 3% 5%;
+			font-size: 1.3rem;
 		}
 
 		.checkboxes {
 			display: flex;
-			padding: 2rem;
+			margin: 3% 5%;
+			font-size: 1.3rem;
 		}
 
 		.err {
@@ -32,7 +44,26 @@ export default function PizzaForm(props) {
 			flex-direction: column;
 		}
 		.box-column input {
-			margin: 0.5rem 3rem 0 2rem;
+			margin: 3% 5%;
+		}
+
+		#specialInstructions {
+			margin: 3% 5%;
+			width: 80%;
+		}
+
+		.name-section {
+			margin: 0 5%;
+		}
+		.link-btn {
+			margin: 1.5rem auto;
+		}
+		.sub-btn {
+			justify-content: center;
+			padding: 1rem 2rem;
+			font-size: 1.5rem;
+			border-radius: 20px;
+			background-color: lightgreen;
 		}
 	`;
 
@@ -214,12 +245,12 @@ export default function PizzaForm(props) {
 						</label>
 					</div>
 				</div> */}
-
+				{/* <div className="err">{errors.specialInstructions}</div> */}
 				<div>
 					<div className="section-label">
 						<h3>Special Instructions</h3>
 					</div>
-					<input
+					<textarea
 						name="specialInstructions"
 						id="specialInstructions"
 						type="text"
@@ -230,20 +261,28 @@ export default function PizzaForm(props) {
 				</div>
 
 				{/* <div className="err">{errors.name}</div> */}
-				<label>
-					Name:
-					<input
-						name="name"
-						id="name"
-						type="text"
-						placeholder="Enter Name..."
-						onChange={changeHandler}
-						value={values.name}
-					/>
-				</label>
+				<div className="name-section">
+					<div className="section-label">
+						<h3>Personal Details</h3>
+						<h4>Required</h4>
+					</div>
+					<label>
+						Name:
+						<input
+							name="name"
+							id="name"
+							type="text"
+							placeholder="Enter Name..."
+							onChange={changeHandler}
+							value={values.name}
+						/>
+					</label>
+				</div>
 
-				<Link to="/pizza-ordered">
-					<button disabled={disabled}>Submit Order</button>
+				<Link className="link-btn" to="/pizza-ordered">
+					<button className="sub-btn" disabled={disabled}>
+						Submit Order
+					</button>
 				</Link>
 			</form>
 		</Form>

@@ -4,13 +4,22 @@ import styled from 'styled-components';
 import RestaurantOptions from './RestaurantOptions.js';
 
 const HomeDiv = styled.div`
+	h1 {
+		color: white;
+		font-size: 3rem;
+		text-align: center;
+	}
+	.linky {
+		text-decoration: none;
+	}
+
 	.pizza-btn {
-		border: 2px solid black;
+		border: 1px solid black;
+		border-radius: 20px;
 		width: 10rem;
 		padding: 1rem 2rem;
 		font-size: 1.5rem;
-		text-decoration: none;
-		background-color: white;
+		background-color: red;
 		color: black;
 		display: flex;
 		justify-content: center;
@@ -28,8 +37,8 @@ export default function Home(props) {
 	return (
 		<HomeDiv>
 			<div className="main-image">
-				<h1>This is the Home Page</h1>
-				<Link id="order-pizza" to="/pizza">
+				<h1>Your Favorite Food, Delivered while Coding</h1>
+				<Link className="linky" id="order-pizza" to="/pizza">
 					<div className="pizza-btn">Pizza?</div>
 				</Link>
 			</div>
