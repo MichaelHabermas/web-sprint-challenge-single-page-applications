@@ -1,17 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as yup from 'yup';
 import { Route, Switch, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Header from './Header.js';
+import Home from './Home.js';
+import PizzaForm from './PizzaForm.js';
+import ConfirmedPage from './ConfirmedPage.js';
 
 const initialData = { name: '' };
 const dummyData = [{ name: 'Michael' }];
 
-const Formdiv = styled.div`
-	padding: 5%;
-	margin: 5%;
-	border-radius: 20px;
-	box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+const Appdiv = styled.div`
+	nav {
+		display: flex;
+		margin: 2% 5%;
+		justify-content: space-between;
+	}
+	.navlinks {
+		display: flex;
+	}
+	.navlink {
+		border: 2px solid black;
+		width: 10rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+
+	.homelink {
+		color: white;
+		background-color: black;
+		text-decoration: none;
+	}
+	#pizza-form {
+		display: flex;
+		flex-direction: column;
+	}
 `;
 
 const App = () => {
@@ -21,14 +47,26 @@ const App = () => {
 	const change = () => {
 		console.log('hi');
 	};
-	const submit = () => {
+	const submit = e => {
+		e.preventDefault();
 		console.log('hi');
 	};
+
 	return (
-		<>
-			<h1>Lambda Eats</h1>
-			<p>You can remove this code and create your own header</p>
-		</>
+		<Appdiv>
+			<Header />
+			<Switch>
+				<Route path="/pizza-ordered">
+					<ConfirmedPage />
+				</Route>
+				<Route path="/pizza">
+					<PizzaForm submit={submit} formData={formData} change={change} />
+				</Route>
+				<Route exact path="/">
+					<Home />
+				</Route>
+			</Switch>
+		</Appdiv>
 	);
 };
 export default App;
