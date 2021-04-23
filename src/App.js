@@ -30,12 +30,10 @@ const initialFormValues = {
 	extraCheese: false
 };
 
-// const dummyData = [{ name: 'Michael' }];
-
 const schema = yup.object().shape({
 	name: yup.string().required('Name is required').min(2, 'Your Name must be at least 2 characters'),
-	size: yup.string(),
-	sauce: yup.string(),
+	size: yup.string().required('Must choose a size'),
+	sauce: yup.string().required('Must choose a sauce'),
 	specialInstructions: yup.string(),
 	pepperoni: yup.boolean(),
 	sausage: yup.boolean(),
@@ -44,7 +42,7 @@ const schema = yup.object().shape({
 	grilledChicken: yup.boolean(),
 	onions: yup.boolean(),
 	greenPeppers: yup.boolean(),
-	dicedTomatoes: yup.boolean(),
+	dicedTomatos: yup.boolean(),
 	blackOlives: yup.boolean(),
 	roastedGarlic: yup.boolean(),
 	artichokeHearts: yup.boolean(),
@@ -136,7 +134,6 @@ const App = () => {
 
 	// this collects the inputs from the forms as they are entered, and prepares then for the submission process
 	const changeHandler = e => {
-		e.preventDefault();
 		const { name, type, value, checked } = e.target;
 		const updatedInfo = type === 'checkbox' ? checked : value;
 		setFormErrors(name, updatedInfo);

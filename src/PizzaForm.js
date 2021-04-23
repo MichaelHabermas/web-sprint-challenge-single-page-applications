@@ -58,7 +58,7 @@ const Form = styled.div`
 
 	.err {
 		color: red;
-		font-size: 15%;
+		font-size: 1rem;
 	}
 
 	.box-column {
@@ -113,12 +113,13 @@ export default function PizzaForm(props) {
 						<h3>Choice of Size</h3>
 						<h4>Required</h4>
 					</div>
+					<div className="err">{errors.size}</div>
 					<select id="size-dropdown" onChange={changeHandler} value={values.size} name="size">
 						<option value="">Select</option>
 						<option value="Small">Small - 10"</option>
 						<option value="Medium">Medium - 14"</option>
 						<option value="Large">Large - 20"</option>
-						<option value="HomeWrecker">HomeWrecker - 30"</option>
+						<option value="XtraLarge">Xtra Large - 30"</option>
 					</select>
 				</div>
 
@@ -128,6 +129,7 @@ export default function PizzaForm(props) {
 						<h4>Required</h4>
 					</div>
 					<div className="radio-btns">
+						<div className="err">{errors.sauce}</div>
 						<label>
 							<input
 								name="sauce"
@@ -327,12 +329,12 @@ export default function PizzaForm(props) {
 					</div>
 				</div>
 
-				<div className="err">{errors.specialInstructions}</div>
 				<div>
 					<div className="section-label">
 						<h3>Special Instructions</h3>
 					</div>
 					<div className="name-section">
+						<div className="err">{errors.specialInstructions}</div>
 						<input
 							name="specialInstructions"
 							id="special-text"
@@ -344,13 +346,13 @@ export default function PizzaForm(props) {
 					</div>
 				</div>
 
-				<div className="err">{errors.name}</div>
 				<div>
 					<div className="section-label">
 						<h3>Personal Details</h3>
 						<h4>Required</h4>
 					</div>
 					<div className="name-section">
+						<div className="err">{errors.name}</div>
 						<label htmlFor="name">
 							Name:
 							<input
@@ -365,8 +367,8 @@ export default function PizzaForm(props) {
 					</div>
 				</div>
 
-				<Link className="link-btn" to="/pizza-ordered">
-					<button onClick={submit} id="order-button" className="sub-btn" disabled={disabled}>
+				<Link className="link-btn" to="/pizza-ordered" onClick={submit} id="order-button">
+					<button className="sub-btn" disabled={disabled}>
 						Submit Order
 					</button>
 				</Link>
