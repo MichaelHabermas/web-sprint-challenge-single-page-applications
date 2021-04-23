@@ -4,6 +4,7 @@ describe('Testing the sprint challenge app', () => {
 	const specialInstructionsInput = () => cy.get('input[name="specialInstructions"]');
 	const sizeDropdownMenu = () => cy.get('#size-dropdown');
 	const garlicRanchRadio = () => cy.get('input[value="GarlicRanch"]');
+	const smallPizza = () => cy.get('select').select('Small');
 	const pepperoniCheckbox = () => cy.get('input[name="pepperoni"]');
 	const grilledChickenCheckbox = () => cy.get('input[name="grilledChicken"]');
 	const pineappleCheckbox = () => cy.get('input[name="pineapple"]');
@@ -24,6 +25,7 @@ describe('Testing the sprint challenge app', () => {
 		nameInput().should('exist');
 		specialInstructionsInput().should('exist');
 		sizeDropdownMenu().should('exist');
+		smallPizza().should('exist');
 		pepperoniCheckbox().should('exist');
 		grilledChickenCheckbox().should('exist');
 		pineappleCheckbox().should('exist');
@@ -36,13 +38,11 @@ describe('Testing the sprint challenge app', () => {
 		nameInput().should('have.value', '').type('Michael').should('have.value', 'Michael');
 		specialInstructionsInput().should('have.value', '').type('Half Cheese').should('have.value', 'Half Cheese');
 		garlicRanchRadio().should('not.be.checked').click().should('be.checked');
+		cy.get('select').select('Small');
 		pepperoniCheckbox().should('not.be.checked').click().should('be.checked');
 		grilledChickenCheckbox().should('not.be.checked').click().should('be.checked');
 		pineappleCheckbox().should('not.be.checked').click().should('be.checked');
 		orderButton().click();
-		// .then(() => {
-		// 	expect(submit()).to.be.calledOnce;
-		// });
 		cy.url().should('include', '/pizza-ordered');
 	});
 });
